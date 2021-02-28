@@ -1,6 +1,8 @@
 import React from 'react';
+import { Button, Collapse } from 'antd';
+import { HeartOutlined, StarOutlined } from '@ant-design/icons';
 
-import styles from './index.module.less';
+const { Panel } = Collapse;
 
 export function Index() {
   /*
@@ -9,46 +11,58 @@ export function Index() {
    * Note: The corresponding styles are in the ./index.less file.
    */
   return (
-    <div className={styles.page}>
-      <h2>Resources &amp; Tools</h2>
-      <p>Thank you for using and showing some ♥ for Nx.</p>
-      <div className="flex github-star-container">
+    <div>
+      <h2 className="text-center font-md mt-10 mb-2">Resources &amp; Tools</h2>
+
+      <p className="text-center">
+        Thank you for using and showing some <HeartOutlined /> for Nx.
+      </p>
+
+      <div className="flex items-center justify-center github-star-container">
         <a
           href="https://github.com/nrwl/nx"
           target="_blank"
           rel="noopener noreferrer"
+          className="flex flex-row gap-2"
         >
-          {' '}
-          If you like Nx, please give it a star:
-          <div className="github-star-badge">
-            <img src="/star.svg" className="material-icons" alt="" />
+          If you like Nx, please give it a star:{' '}
+          <Button type="primary" size="small" icon={<StarOutlined />}>
             Star
-          </div>
+          </Button>
         </a>
       </div>
-      <p>Here are some links to help you get started.</p>
-      <ul className="resources">
-        <li className="col-span-2">
+
+      <p className="text-center">
+        Here are some links to help you get started.
+      </p>
+
+      <ul className="list-none flex flex-col gap-3 p-0 text-center">
+        <li className="py-2 px-4 border border-solid border-gray-300 rounded-md w-full hover:bg-blue-50">
           <a
-            className="resource flex"
+            className="flex items-center justify-center"
             href="https://egghead.io/playlists/scale-react-development-with-nx-4038"
           >
             Scale React Development with Nx (Course)
           </a>
         </li>
-        <li className="col-span-2">
+
+        <li className="py-2 px-4 border border-solid border-gray-300 rounded-md w-full hover:bg-blue-50">
           <a
-            className="resource flex"
+            className="flex items-center justify-center"
             href="https://nx.dev/latest/react/tutorial/01-create-application"
           >
             Interactive tutorial
           </a>
         </li>
-        <li className="col-span-2">
-          <a className="resource flex" href="https://nx.app/">
+
+        <li className="py-2 px-4 border border-solid border-gray-300 rounded-md w-full hover:bg-blue-50">
+          <a
+            className="flex flex-row items-center justify-center gap-2"
+            href="https://nx.app/"
+          >
             <svg
-              width="36"
-              height="36"
+              width="12"
+              height="12"
               viewBox="0 0 120 120"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -62,27 +76,27 @@ export function Index() {
                 fill="white"
               />
             </svg>
-            <span className="gutter-left">Nx Cloud</span>
+            <span>Nx Cloud</span>
           </a>
         </li>
       </ul>
+
       <h2>Next Steps</h2>
-      <p>Here are some things you can do with Nx.</p>
-      <details open>
-        <summary>Add UI library</summary>
-        <pre>{`# Generate UI lib
+      <p className="text-center">Here are some things you can do with Nx.</p>
+
+      <Collapse defaultActiveKey={['1']}>
+        <Panel header="Add UI library" key="1">
+          <pre>{`# Generate UI lib
 nx g @nrwl/react:lib ui
 
 # Add a component
 nx g @nrwl/react:component xyz --project ui`}</pre>
-      </details>
-      <details>
-        <summary>View dependency graph</summary>
-        <pre>{`nx dep-graph`}</pre>
-      </details>
-      <details>
-        <summary>Run affected commands</summary>
-        <pre>{`# see what's been affected by changes
+        </Panel>
+        <Panel header="View dependency graph" key="2">
+          <pre>{`nx dep-graph`}</pre>
+        </Panel>
+        <Panel header="Run affected commands" key="3">
+          <pre>{`# see what's been affected by changes
 nx affected:dep-graph
 
 # run tests for current changes
@@ -91,7 +105,8 @@ nx affected:test
 # run e2e tests for current changes
 nx affected:e2e
 `}</pre>
-      </details>
+        </Panel>
+      </Collapse>
     </div>
   );
 }

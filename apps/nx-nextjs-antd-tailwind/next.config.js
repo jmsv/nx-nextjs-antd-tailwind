@@ -1,11 +1,20 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withNx = require('@nrwl/next/plugins/with-nx');
-
 const withLess = require('@zeit/next-less');
-module.exports = withLess(
-  withNx({
-    // Set this to true if you use CSS modules.
-    // See: https://github.com/css-modules/css-modules
+const withSass = require('@zeit/next-sass');
+const withCSS = require('@zeit/next-css');
+
+module.exports = withLess({
+  ...withNx({
     cssModules: false,
-  })
-);
+  }),
+  ...withSass({
+    lessLoaderOptions: {
+      javascriptEnabled: true,
+    },
+    ...withCSS({
+      cssLoaderOptions: {
+        url: false,
+      },
+    }),
+  }),
+});

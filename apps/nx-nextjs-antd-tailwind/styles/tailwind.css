@@ -1,0 +1,3 @@
+/* `@tailwind base` omitted to avoid clashing with AntD components alignment */
+@tailwind components;
+@tailwind utilities;
